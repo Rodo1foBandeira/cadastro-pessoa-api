@@ -47,10 +47,10 @@ namespace cadastro_pessoa_api.Controllers
             return request;
         }
 
-        [HttpDelete]
-        public void Delete(Pessoa request)
+        [HttpDelete("{id}")]
+        public void Delete(int id)
         {
-            _context.Remove(request);
+            _context.Remove(new Pessoa { Id = id });
             _context.SaveChanges();
         }
     }
