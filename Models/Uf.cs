@@ -8,5 +8,7 @@ namespace cadastro_pessoa_api.Models
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Sigla { get; set; }
+        
+        public virtual ICollection<Cidade> Cidades { get; set; }
     }
 }

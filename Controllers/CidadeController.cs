@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using cadastro_pessoa_api.Models;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace cadastro_pessoa_api.Controllers
 {
@@ -22,13 +23,17 @@ namespace cadastro_pessoa_api.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Cidade>> Get()
         {
-            return _context.Cidade.ToList();
+            var cidades = _context.Cidade.Include(x => x.Uf).ToList();
+            cidades.ForEach(x => x.Uf.Cidades = null);
+            return cidades;
         }
 
         [HttpGet("{id}")]
         public ActionResult<Cidade> GetById(int id)
         {
-            return _context.Cidade.First(x => x.Id == id);
+            var cidade = _context.Cidade.First(x => x.Id == id);
+            //cidade.Uf.Cidades = null;
+            return cidade;
         }
 
         [HttpPost]

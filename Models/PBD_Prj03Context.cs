@@ -8,11 +8,13 @@ namespace cadastro_pessoa_api.Models
     {
         public PBD_Prj03Context()
         {
+            //Database.AutoTransactionsEnabled = false;
         }
 
         public PBD_Prj03Context(DbContextOptions<PBD_Prj03Context> options)
             : base(options)
         {
+            //options.Configuration.ProxyCreationEnabled = false;
         }
 
         public virtual DbSet<Bairro> Bairro { get; set; }
@@ -29,12 +31,12 @@ namespace cadastro_pessoa_api.Models
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseMySQL("server=localhost;port=3306;user=rodolfo;password=123;database=PBD_Prj03");
-            }
+            }            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
+            modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");            
 
             modelBuilder.Entity<Bairro>(entity =>
             {
@@ -56,7 +58,7 @@ namespace cadastro_pessoa_api.Models
 
                 entity.HasIndex(e => e.UfId)
                     .HasName("cid_uf_id");
-
+                
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -65,16 +67,14 @@ namespace cadastro_pessoa_api.Models
                     .HasColumnName("nome")
                     .HasMaxLength(100)
                     .IsUnicode(false);
-
+                
                 entity.Property(e => e.UfId)
                     .HasColumnName("uf_id")
                     .HasColumnType("int(11)");
                 /*
                 entity.HasOne(d => d.Uf)
-                    .WithMany(p => p.Cidade)
-                    .HasForeignKey(d => d.UfId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("cid_uf_id");
+                    .WithMany(p => p.Cidades)
+                    .HasForeignKey("uf_id");
                     */
             });
 
