@@ -77,7 +77,7 @@ namespace cadastro_pessoa_api.Controllers
         {
             var fonesExcluidos = _context.Fone
                 .Where(x =>
-                    x.Id == request.Id &&
+                    x.PessoaId == request.Id &&
                     !request.Fones.Where(y => y.Id.HasValue).Select(y => y.Id).Contains(x.Id)
                 );
             foreach (var item in fonesExcluidos)
@@ -97,7 +97,7 @@ namespace cadastro_pessoa_api.Controllers
             //
             var emailsExcluidos = _context.Email
                 .Where(x =>
-                    x.Id == request.Id &&
+                    x.PessoaId == request.Id &&
                     !request.Emails.Where(y => y.Id.HasValue).Select(y => y.Id).Contains(x.Id)
                 );
             foreach (var item in emailsExcluidos)
@@ -122,6 +122,20 @@ namespace cadastro_pessoa_api.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var fones = _context.Fone.Where(x => x.PessoaId == id).ToList();
+            foreach (var fone in fones)
+            {
+                _context.Remove(fone);
+            }
+
+            var emails = _context.Email.Where(x => x.PessoaId == id).ToList();
+            foreach (var email in emails)
+            {
+                _context.Remove(email);
+            }
+            
+            _context.SaveChanges();
+
             _context.Remove(new Pessoa { Id = id });
             _context.SaveChanges();
         }

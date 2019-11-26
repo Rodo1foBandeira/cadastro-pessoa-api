@@ -247,11 +247,6 @@ namespace cadastro_pessoa_api.Models
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
-                //entity.HasMany(g => g.Fones);
-                    //.HasForeignKey<int>(s => s.PessoaId);
-
-                //entity.HasMany(g => g.Emails);
-                    //.HasForeignKey<int>(s => s.PessoaId); 
                 /*
                 entity.HasOne(d => d.Bairro)
                     .WithMany(p => p.Pessoa)
