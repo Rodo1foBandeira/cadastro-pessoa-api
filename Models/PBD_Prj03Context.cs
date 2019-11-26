@@ -102,12 +102,13 @@ namespace cadastro_pessoa_api.Models
                     .HasColumnName("tipo")
                     .HasMaxLength(20)
                     .IsUnicode(false);
-
+                /*
                 entity.HasOne(d => d.Pessoa)
-                    .WithMany(p => p.Email)
+                    .WithMany(p => p.Emails)
                     .HasForeignKey(d => d.PessoaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("ema_pes_id");
+                    */
             });
 
             modelBuilder.Entity<Fone>(entity =>
@@ -132,12 +133,13 @@ namespace cadastro_pessoa_api.Models
                 entity.Property(e => e.PessoaId)
                     .HasColumnName("pessoa_id")
                     .HasColumnType("int(11)");
-
+                /*
                 entity.HasOne(d => d.Pessoa)
-                    .WithMany(p => p.Fone)
+                    .WithMany(p => p.Fones)
                     .HasForeignKey(d => d.PessoaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fon_pes_id");
+                */
             });
 
             modelBuilder.Entity<LogPessoa>(entity =>
@@ -244,6 +246,12 @@ namespace cadastro_pessoa_api.Models
                     .HasColumnName("tipo_pessoa")
                     .HasMaxLength(10)
                     .IsUnicode(false);
+
+                //entity.HasMany(g => g.Fones);
+                    //.HasForeignKey<int>(s => s.PessoaId);
+
+                //entity.HasMany(g => g.Emails);
+                    //.HasForeignKey<int>(s => s.PessoaId); 
                 /*
                 entity.HasOne(d => d.Bairro)
                     .WithMany(p => p.Pessoa)

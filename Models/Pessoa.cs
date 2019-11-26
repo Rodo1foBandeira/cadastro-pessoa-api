@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace cadastro_pessoa_api.Models
 {
@@ -7,8 +8,8 @@ namespace cadastro_pessoa_api.Models
     {
         public Pessoa()
         {
-            Email = new HashSet<Email>();
-            Fone = new HashSet<Fone>();
+            Emails = new HashSet<Email>();
+            Fones = new HashSet<Fone>();
         }
 
         public int Id { get; set; }
@@ -22,8 +23,8 @@ namespace cadastro_pessoa_api.Models
         public int CidadeId { get; set; }
 
         public virtual Bairro Bairro { get; set; }
-        public virtual Cidade Cidade { get; set; }
-        public virtual ICollection<Email> Email { get; set; }
-        public virtual ICollection<Fone> Fone { get; set; }
+        public virtual Cidade Cidade { get; set; }        
+        public virtual ICollection<Email> Emails { get; set; }
+        public virtual ICollection<Fone> Fones { get; set; }
     }
 }
