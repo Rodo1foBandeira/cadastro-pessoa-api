@@ -76,7 +76,8 @@ namespace cadastro_pessoa_api.Controllers
         public ActionResult<Pessoa> Put(Pessoa request)
         {
             var fonesExcluidos = _context.Fone
-                .Where(x => 
+                .Where(x =>
+                    x.Id == request.Id &&
                     !request.Fones.Where(y => y.Id.HasValue).Select(y => y.Id).Contains(x.Id)
                 );
             foreach (var item in fonesExcluidos)
@@ -95,7 +96,8 @@ namespace cadastro_pessoa_api.Controllers
             request.Fones = null;
             //
             var emailsExcluidos = _context.Email
-                .Where(x => 
+                .Where(x =>
+                    x.Id == request.Id &&
                     !request.Emails.Where(y => y.Id.HasValue).Select(y => y.Id).Contains(x.Id)
                 );
             foreach (var item in emailsExcluidos)
